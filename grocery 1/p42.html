@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>
+        Shopping Cart
+    </title>
+
+    <link rel="stylesheet" type="text/css" href="Shopping Cart CSS.css">
+
+    <script src="https://kit.fontawesome.com/9088cc6401.js" crossorigin="anonymous"></script>
+
+</head>
+
+<link rel="shortcut icon" type="image/jpg" href="C:\Users\hp\Desktop\College\First Semester\Introduction To Web Technologies\Notepad ++ Files\Project\favicon.ico" />
+
+<body>
+
+    <div class="container">
+
+        <h1>
+            Shopping Cart
+        </h1>
+
+        <div class="cart">
+
+            <div class="products">
+
+                <div class="product">
+
+                    <img src="patato.png">
+
+                    <div class="product-info">
+
+                        <h3 class="product-name">
+
+                            potato
+
+                        </h3>
+
+                        <h4 class="product-price">
+
+                            Rs. 60
+
+                        </h4>
+
+                        <h4 class="product-offer">
+
+                            10%
+
+                        </h4>
+
+                        <p class="product-quantity">
+
+                            Qnt:
+                            <input value="1" name="" class="quantity">
+                            <!-- Added class "quantity" to input -->
+
+                        </p>
+
+                        <p class="product-remove">
+
+                            <i class="fas fa-trash-alt"></i>
+
+                            <span class="remove" onclick="removeItem(this)">
+                                <!-- Added onclick event to call removeItem function -->
+                                Remove
+                            </span>
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div class="product">
+
+                    <img src="apple.png">
+
+                    <div class="product-info">
+
+                        <h3 class="product-name">
+
+                            apple
+
+                        </h3>
+
+                        <h4 class="product-price">
+
+                            Rs. 100
+
+                        </h4>
+
+                        <h4 class="product-offer">
+
+                            5%
+
+                        </h4>
+
+                        <p class="product-quantity">
+
+                            Qnt:
+                            <input value="1" name="" class="quantity">
+                            <!-- Added class "quantity" to input -->
+
+                        </p>
+                        <p class="product-remove">
+
+                            <i class="fas fa-trash-alt"></i>
+
+                            <span class="remove" onclick="removeItem(this)">
+                                <!-- Added onclick event to call removeItem function -->
+                                Remove
+                            </span>
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="cart-total">
+
+                <p>
+
+                    <span>
+
+                        Total Price
+
+                    </span>
+
+                    <span class="total-price">
+                        Rs. 160
+                    </span>
+
+                </p>
+                <p>
+
+                    <span>
+
+                        No. of Items
+
+                    </span>
+
+                    <span class="item-count">
+                        2
+                    </span>
+
+                </p>
+
+                <p>
+
+                    <span>
+
+                        You Save
+
+                    </span>
+
+                    <span class="savings">
+                        Rs. 11
+                    </span>
+
+                </p>
+
+                <a href="Details For Checkout HTML.html">
+
+                    Proceed to Checkout
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+        // Function to remove item from cart
+        function removeItem(element) {
+            var product = element.closest('.product');
+            product.parentNode.removeChild(product);
+            updateCartTotal();
+        }
+
+        // Function to update total price, item count, and savings
+        function updateCartTotal() {
+            var total = 0;
+            var itemCount = 0;
+            var savings = 0;
+
+            var products = document.getElementsByClassName('product');
+
+            for (var i = 0; i < products.length; i++) {
+                var priceElement = products[i].getElementsByClassName('product-price')[0];
+                var price = parseFloat(priceElement.innerText.replace('Rs. ', ''));
+                var quantityElement = products[i].getElementsByClassName('quantity')[0];
+                var quantity = parseInt(quantityElement.value);
+                total += price * quantity;
+                itemCount += quantity;
+            }
+
+            // Calculate savings (if applicable)
+            var totalPriceElement = document.querySelector('.cart-total .total-price');
+            var totalPrice = parseFloat(totalPriceElement.innerText.replace('Rs. ', ''));
+            savings = totalPrice - total;
+
+            // Update total price, item count, and savings in the cart
+            document.querySelector('.cart-total .total-price').innerText = 'Rs. ' + total.toFixed(2);
+            document.querySelector('.cart-total .item-count').innerText = itemCount;
+            document.querySelector('.cart-total .savings').innerText = 'Rs. ' + savings.toFixed(2);
+        }
+    </script>
+
+</body>
+
+</html>
